@@ -1,0 +1,59 @@
+<div class="text-center">
+  <h3 style="margin-top:8px;">Search your favourite Movie/Series/Games</h3> 
+<form [formGroup]="imdbForm" >
+<div class="input-group col-md-6" style="margin:0 auto;">
+  <input id="searchInput" type="text" class="form-control" formControlName="searchString" (keyup.enter)="getResult('button')" placeholder="Enter text search" required>
+  <div class="input-group-append">
+    <button type="button" class="btn btn-outline-primary" (click)="getResult('button')">Search</button>
+    <select style="color:#007bff;" class="form-control border-primary" id="searchType" formControlName="searchType">
+      <option>all</option>
+      <option>movie</option>
+      <option>series</option>
+      <option>game</option>
+    </select>
+  </div>
+</div>
+
+<div style="width:50%;margin:0 auto;text-align:center;padding-top:5%;" *ngIf="loading">
+  <img src="./assets/loading.gif" alt="loading" style="max-width:50%;"/>
+</div>
+
+<div id="result" *ngIf="showResult" style="padding-top:10px;">
+<h3 class="text-center"><b>Search Results</b></h3>
+<div class="jumbotron flex-container" style="padding-bottom:5px;margin-bottom:5px;">
+<div class="card text-center col-md-3" style="max-width:310px;margin:5px;" *ngFor="let data of result.Search">
+  <img class="rounded card-img-top" [src]="data.Poster != 'N/A' ? data.Poster : noImageUrl" alt="Image Not Available" style="max-width:310px;max-height:400px;padding-top:10px;"/>
+  <div class="card-body">
+    <h4 class="card-title">{{data.Title}}</h4>
+    <p class="card-text">Type:&nbsp;&nbsp;{{data.Type}}</p>
+    <p class="card-text">Year:&nbsp;&nbsp;{{data.Year}}</p>
+    <a (click)="moreDetails()" routerLink="/details/{{data.imdbID}}" class="btn btn-primary">More Details</a>
+  </div>
+</div>
+</div>
+<span id="pageSearch" style="margin:0 40%;">
+    <span>Go to Page
+    <input type="text" formControlName="pageNo" (keyup.enter)="anotherPage(imdbForm.controls.pageNo.value,'input')" size="2" required/>&nbsp;of {{totalPage}}
+    <button class="btn btn-primary" type="button" (click)="anotherPage(imdbForm.controls.pageNo.value,'input')">Go</button></span>
+</span>
+<ul class="pagination">
+  <li class="page-item" [ngClass]="currentPage == 1 ? 'disabled' : ''"><a class="page-link" (click)="anotherPage(currentPage-1,'prev')">prev</a></li>
+  <li class="page-item" *ngIf="currentPagination[0]!= 1"><a (click)="changePagination('back')" class="page-link"><<</a></li> 
+  <li class="page-item" *ngFor="let data of currentPagination" [ngClass]="currentPage == data ? 'active' : ''"><a class="page-link" (click)="anotherPage(data,'pagination')">{{data}}</a></li>
+  <li class="page-item" *ngIf="currentPagination.slice(-1).pop()!=totalPage"><a (click)="changePagination('front')" class="page-link">>></a></li> 
+  <li class="page-item" [ngClass]="currentPage == totalPage ? 'disabled' : ''"><a class="page-link" (click)="anotherPage(currentPage+1,'next')">Next</a></li>
+</ul>
+</div>
+
+<div *ngIf="showError" style="padding-top:20px;">
+  <h3 class="text-center" *ngIf="errorMessage=='Too many results.'">{{errorMessage+' '}}Please try to be more specific!!</h3>
+  <h3 class="text-center" *ngIf="!(errorMessage=='Too many results.')">{{errorMessage}}</h3>
+</div>
+<div *ngIf="networkError" style="padding-top:20px;">
+  <h3 class="text-center">Network Error! Please try again later !!</h3>
+</div>
+</form>
+</div>
+<div class="footer">
+@copyright arunkumar
+</div>

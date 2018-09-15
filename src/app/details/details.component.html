@@ -1,0 +1,29 @@
+<div style="width:50%;margin:0 auto;text-align:center;padding-top:5%;" *ngIf="loading">
+  <img src="../assets/loading.gif" alt="loading" style="max-width:50%;"/>
+</div>
+<div><span class="fa fa-arrow-left"><a routerLink="/search">back</a></span></div>
+<div id="result" *ngIf="show">
+  <div class="row">
+  <div class="col-md-4"><img class="img-rounded" [src]="result.Poster != 'N/A' ? result.Poster : noImageUrl" alt="poster" style="padding:5px;"/></div>
+  <div class="col-md-8"><iframe style="padding:5px;width:90%;height:100%;margin:0 auto;" id="ytplayer" type="text/html"
+  [src]="videoUrl?sanitizer.bypassSecurityTrustResourceUrl(videoUrl):''"
+  frameborder="0"></iframe></div>
+  </div>
+<hr>
+  <h3>Title:{{result.Title}}</h3>
+<ul class="list-group">
+  <li class="list-group-item">Year:{{result.Year}}</li>
+  <li class="list-group-item">Type:{{result.Type}}</li>
+  <li class="list-group-item">Plot:{{result.Plot}}</li>
+  <li class="list-group-item">IMDB Rating:{{result.imdbRating}}</li>
+  <li class="list-group-item">Run Time:{{result.Runtime}}</li>
+  <li class="list-group-item">Release Date:{{result.Released}}</li>
+  <li class="list-group-item">Language:{{result.Language}}</li>
+  <li class="list-group-item">Genre:{{result.Genre}}</li>
+  <li class="list-group-item">Director:{{result.Director}}</li>
+  <li class="list-group-item">Actors:{{result.Actors}}</li>
+  <li class="list-group-item">Country:{{result.Country}}</li>
+  <li class="list-group-item">BoxOffice Collection:{{result.BoxOffice}}</li>
+  <li class="list-group-item">Awards:{{result.Awards}}</li>
+</ul> 
+</div>
