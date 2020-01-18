@@ -26,6 +26,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.loading=true;
     this.route.params.subscribe(params => {
+      console.log(params);
        this.imdbId = params['id'];
        this.searchUrl=this.baseURL+"?i="+this.imdbId+"&apikey="+this.apiKey+"&plot=full";
        this.appService.getActualResult(this.searchUrl).subscribe(

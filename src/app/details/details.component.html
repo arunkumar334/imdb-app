@@ -1,8 +1,8 @@
 <div style="width:50%;margin:0 auto;text-align:center;padding-top:5%;" *ngIf="loading">
-  <img src="../assets/loading.gif" alt="loading" style="max-width:50%;"/>
+  <img src="./assets/loading.gif" alt="loading" style="max-width:50%;"/>
 </div>
-<div><span class="fa fa-arrow-left"><a routerLink="/search">back</a></span></div>
 <div id="result" *ngIf="show">
+  <div class="row"><span style="padding-left:15px;" class="fa fa-arrow-left"><a routerLink="/search">back</a></span></div>
   <div class="row">
   <div class="col-md-4"><img class="img-rounded" [src]="result.Poster != 'N/A' ? result.Poster : noImageUrl" alt="poster" style="padding:5px;"/></div>
   <div class="col-md-8"><iframe style="padding:5px;width:90%;height:100%;margin:0 auto;" id="ytplayer" type="text/html"

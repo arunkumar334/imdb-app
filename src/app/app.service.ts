@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component,Input,Output,EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable, Subject, throwError} from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AppService {
+@Output() emitUsername: EventEmitter<any> = new EventEmitter();
+username:string;
 searchString:string;
 pageNumber:number;
 searchType:string;
@@ -19,6 +21,15 @@ setSearchCriteria(searchString,searchType,pageNumber){
 this.searchString=searchString;
 this.pageNumber=pageNumber;
 this.searchType=searchType;
+}
+
+setUsername(username) {
+	this.username = username;
+	this.emitUsername.emit(this.username);
+}
+
+getUsername() {
+	return this.emitUsername;
 }
 
 private handleErrorObservable (error: Response | any) {

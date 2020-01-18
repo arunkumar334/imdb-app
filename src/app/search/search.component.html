@@ -15,14 +15,15 @@
 </div>
 
 <div style="width:50%;margin:0 auto;text-align:center;padding-top:5%;" *ngIf="loading">
-  <img src="./assets/loading.gif" alt="loading" style="max-width:50%;"/>
+  <img src="./assets/loading.gif" alt="loading" style="width:50%;"/>
 </div>
 
 <div id="result" *ngIf="showResult" style="padding-top:10px;">
 <h3 class="text-center"><b>Search Results</b></h3>
 <div class="jumbotron flex-container" style="padding-bottom:5px;margin-bottom:5px;">
-<div class="card text-center col-md-3" style="max-width:310px;margin:5px;" *ngFor="let data of result.Search">
-  <img class="rounded card-img-top" [src]="data.Poster != 'N/A' ? data.Poster : noImageUrl" alt="Image Not Available" style="max-width:310px;max-height:400px;padding-top:10px;"/>
+<div class="card text-center" style="width:19%;margin:5px;" *ngFor="let data of result.Search">
+  <img class="rounded card-img-top" [src]="data.Poster != 'N/A' ? data.Poster : noImageUrl" alt="Image Not Available" 
+  style="width:90%;height:60%;padding-top:5%;padding-left:8%;" onerror="this.src='./assets/no_image.png'"/>
   <div class="card-body">
     <h4 class="card-title">{{data.Title}}</h4>
     <p class="card-text">Type:&nbsp;&nbsp;{{data.Type}}</p>
@@ -47,7 +48,7 @@
 
 <div *ngIf="showError" style="padding-top:20px;">
   <h3 class="text-center" *ngIf="errorMessage=='Too many results.'">{{errorMessage+' '}}Please try to be more specific!!</h3>
-  <h3 class="text-center" *ngIf="!(errorMessage=='Too many results.')">{{errorMessage}}</h3>
+  <h3 class="text-center" *ngIf="errorMessage!='Too many results.'">{{errorMessage}}</h3>
 </div>
 <div *ngIf="networkError" style="padding-top:20px;">
   <h3 class="text-center">Network Error! Please try again later !!</h3>

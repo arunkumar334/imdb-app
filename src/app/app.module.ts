@@ -6,25 +6,26 @@ import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { SearchComponent } from './search/search.component';
 import { DetailsComponent } from './details/details.component';
-import { RouterModule, Routes } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReactiveFormsModule } from '@angular/forms';
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
-  { path: 'search', component: SearchComponent },
-  { path: 'details/:id', component: DetailsComponent }
-];
+import { HomeComponent } from './home/home.component';
+import { OthersComponent } from './others/others.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { RoutingModule } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    DetailsComponent
+    DetailsComponent,
+    HomeComponent,
+    OthersComponent,
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes),
+    RoutingModule,
     BrowserModule,
     FormsModule,
     HttpModule,

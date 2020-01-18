@@ -153,4 +153,8 @@ moreDetails(){
   this.appService.setSearchCriteria(this.imdbForm.controls.searchString.value,this.imdbForm.controls.searchType.value,this.currentPage);
 }
 
+failedImage(data){
+  console.log(data);
+}
+
 }
